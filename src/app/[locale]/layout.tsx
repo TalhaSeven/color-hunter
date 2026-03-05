@@ -89,12 +89,49 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const baseUrl = "https://innerhunt.com";
+  const canonicalUrl = locale === "tr" ? baseUrl : `${baseUrl}/${locale}`;
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: t("title"),
+    description: t("description"),
+    url: canonicalUrl,
+    applicationCategory: "LifestyleApplication",
+    operatingSystem: "All",
+    inLanguage: locale,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Inner Hunt",
+      url: baseUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/icon-512.png`,
+      },
+    },
+    image: `${baseUrl}/icon-512.png`,
+    screenshot: `${baseUrl}/opengraph-image`,
+  };
+
   return (
     <html
       lang={locale}
       dir="ltr"
       className={`${amiri.variable} ${playfair.variable} ${dmSans.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Analytics />
