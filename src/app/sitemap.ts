@@ -2,10 +2,10 @@ import { MetadataRoute } from 'next';
 
 const locales = ['tr', 'en', 'de', 'es'] as const;
 const defaultLocale = 'tr';
-const baseUrl = 'https://colorhunter.app';
+const baseUrl = 'https://innerhunt.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // Color Hunter is a single-page app conceptually, so we just return the root URL for all locales
+    // Inner Hunt is a single-page app conceptually, so we just return the root URL for all locales
     return [
         {
             url: baseUrl,

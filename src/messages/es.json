@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "Color Hunter — Búsqueda de Color Meditativa",
+    "title": "Inner Hunt — Búsqueda de Color Meditativa",
     "description": "Descubre tu estado de ánimo, encuentra tu color y reflexiona con el Nombre Divino del día."
   },
   "intro": {
     "badge": "Contemplativo",
-    "title": "Color Hunter",
+    "title": "Inner Hunt",
     "description": "Descubre tu estado de ánimo, encuentra tu color y emprende un viaje de contemplación profunda con uno de los Nombres Divinos.",
     "startButton": "Comenzar ✦",
     "steps": {
@@ -110,7 +110,9 @@
     "label": "{number}. Nombre",
     "tefekkurTitle": "✦ Guía de Contemplación",
     "shareButton": "Compartir ↗",
-    "restartButton": "Reiniciar"
+    "restartButton": "Reiniciar",
+    "dhikrLabel": "Dhikr",
+    "dhikrUnit": "veces"
   },
   "esmaDetails": {
     "1": {
@@ -290,7 +292,7 @@
     "es": "Español"
   },
   "pwa": {
-    "installTitle": "Añade Color Hunter a tu pantalla de inicio",
+    "installTitle": "Añade Inner Hunt a tu pantalla de inicio",
     "installButton": "Añadir",
     "iosHint": "Toca el icono de compartir en Safari y selecciona 'Añadir a pantalla de inicio'",
     "dismiss": "Cerrar"

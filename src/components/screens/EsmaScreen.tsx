@@ -32,10 +32,10 @@ export default function EsmaScreen({
 
   const handleShare = useCallback(async () => {
     track("journey_shared", { esma_name: esma.name, esma_number: esma.number });
-    const text = `✨ ${esma.name} — ${moodEmoji} ${moodName}\n"${meaning}"\n\n${tefekkur}\n\n— Color Hunter 🔍`;
+    const text = `✨ ${esma.name} — ${moodEmoji} ${moodName}\n"${meaning}"\n\n${tefekkur}\n\n📿 Zikir: ${esma.dhikrCount} defa\n\n— Inner Hunt 🔍\nhttps://innerhunt.com`;
     if (navigator.share) {
       try {
-        await navigator.share({ title: `Color Hunter — ${esma.name}`, text });
+        await navigator.share({ title: `Inner Hunt — ${esma.name}`, text });
       } catch {
         /* cancelled */
       }
@@ -197,6 +197,54 @@ export default function EsmaScreen({
           {tEsma("tefekkurTitle")}
         </strong>
         {tefekkur}
+      </motion.div>
+
+      {/* Dhikr count */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.75 }}
+        className="flex items-center justify-center"
+        style={{
+          gap: 10,
+          padding: "12px 24px",
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: 16,
+          maxWidth: 400,
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 11,
+            letterSpacing: 2,
+            textTransform: "uppercase" as const,
+            color: "var(--color-gold)",
+            opacity: 0.8,
+          }}
+        >
+          {tEsma("dhikrLabel")}
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: 22,
+            fontWeight: 700,
+            color: "var(--color-text)",
+          }}
+        >
+          {esma.dhikrCount}
+        </div>
+        <div
+          style={{
+            fontSize: 12,
+            color: "var(--color-text-dim)",
+            opacity: 0.6,
+          }}
+        >
+          {tEsma("dhikrUnit")}
+        </div>
       </motion.div>
 
       {/* Action buttons */}

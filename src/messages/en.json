@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "Color Hunter — Mindful Color Hunt",
+    "title": "Inner Hunt — Mindful Color Hunt",
     "description": "Discover your mood, find your color, and reflect with today's Divine Name."
   },
   "intro": {
     "badge": "Contemplative",
-    "title": "Color Hunter",
+    "title": "Inner Hunt",
     "description": "Discover your mood, find your color, and embark on a deep contemplation journey with one of the Divine Names.",
     "startButton": "Start ✦",
     "steps": {
@@ -110,7 +110,9 @@
     "label": "{number}. Name",
     "tefekkurTitle": "✦ Contemplation Guide",
     "shareButton": "Share ↗",
-    "restartButton": "Start Over"
+    "restartButton": "Start Over",
+    "dhikrLabel": "Dhikr",
+    "dhikrUnit": "times"
   },
   "esmaDetails": {
     "1": {
@@ -290,7 +292,7 @@
     "es": "Español"
   },
   "pwa": {
-    "installTitle": "Add Color Hunter to your home screen",
+    "installTitle": "Add Inner Hunt to your home screen",
     "installButton": "Add",
     "iosHint": "Tap the share icon in Safari and select 'Add to Home Screen'",
     "dismiss": "Close"

@@ -90,7 +90,7 @@ export default function Image() {
           marginBottom: 20,
         }}
       >
-        Color Hunter
+        Inner Hunt
       </div>
 
       {/* Tagline */}

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'color-hunter-v1';
+const CACHE_NAME = 'inner-hunt-v1';
 
 // App shell resources to pre-cache
 const STATIC_ASSETS = [

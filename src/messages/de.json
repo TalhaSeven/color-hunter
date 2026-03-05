@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "Color Hunter — Achtsame Farbensuche",
+    "title": "Inner Hunt — Achtsame Farbensuche",
     "description": "Entdecke deine Stimmung, finde deine Farbe und reflektiere mit dem göttlichen Namen des Tages."
   },
   "intro": {
     "badge": "Kontemplativ",
-    "title": "Color Hunter",
+    "title": "Inner Hunt",
     "description": "Entdecken Sie Ihre Stimmung, finden Sie Ihre Farbe und begeben Sie sich auf eine tiefe Kontemplationsreise mit einem der göttlichen Namen.",
     "startButton": "Starten ✦",
     "steps": {
@@ -110,7 +110,9 @@
     "label": "{number}. Name",
     "tefekkurTitle": "✦ Kontemplationsführer",
     "shareButton": "Teilen ↗",
-    "restartButton": "Neu starten"
+    "restartButton": "Neu starten",
+    "dhikrLabel": "Dhikr",
+    "dhikrUnit": "Mal"
   },
   "esmaDetails": {
     "1": {
@@ -290,7 +292,7 @@
     "es": "Español"
   },
   "pwa": {
-    "installTitle": "Color Hunter zum Startbildschirm hinzufügen",
+    "installTitle": "Inner Hunt zum Startbildschirm hinzufügen",
     "installButton": "Hinzufügen",
     "iosHint": "Tippen Sie auf das Teilen-Symbol in Safari und wählen Sie 'Zum Home-Bildschirm'",
     "dismiss": "Schließen"

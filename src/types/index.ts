@@ -15,6 +15,7 @@ export interface EsmaBase {
   number: number;
   name: string;
   arabic: string;
+  dhikrCount: number;
 }
 
 export type AppStep = 0 | 1 | 2 | 3 | 4;

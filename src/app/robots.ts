@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = 'https://colorhunter.app';
+    const baseUrl = 'https://innerhunt.com';
 
     return {
         rules: {

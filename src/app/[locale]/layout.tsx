@@ -39,16 +39,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
-  const baseUrl = "https://colorhunter.app";
+  const baseUrl = "https://innerhunt.com";
 
   return {
+    metadataBase: new URL(baseUrl),
     title: t("title"),
     description: t("description"),
     manifest: "/manifest.json",
     appleWebApp: {
       capable: true,
       statusBarStyle: "black-translucent",
-      title: "Color Hunter",
+      title: "Inner Hunt",
     },
     icons: {
       apple: "/icon-192.png",

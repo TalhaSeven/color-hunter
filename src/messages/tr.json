@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "Color Hunter — Tefekkürane Renk Avı",
+    "title": "Inner Hunt — Tefekkürane Renk Avı",
     "description": "Ruh halinizi keşfedin, renginizi bulun ve günün Esması ile tefekkür edin."
   },
   "intro": {
     "badge": "Tefekkürane",
-    "title": "Color Hunter",
+    "title": "Inner Hunt",
     "description": "Ruh halinizi keşfedin, renginizi bulun ve o güne ait Esma ile derin bir tefekkür yolculuğuna çıkın.",
     "startButton": "Başla ✦",
     "steps": {
@@ -110,7 +110,9 @@
     "label": "{number}. Esma",
     "tefekkurTitle": "✦ Tefekkür Rehberi",
     "shareButton": "Paylaş ↗",
-    "restartButton": "Yeniden Başla"
+    "restartButton": "Yeniden Başla",
+    "dhikrLabel": "Zikir",
+    "dhikrUnit": "defa"
   },
   "esmaDetails": {
     "1": {
@@ -290,7 +292,7 @@
     "es": "Español"
   },
   "pwa": {
-    "installTitle": "Color Hunter'ı ana ekranınıza ekleyin",
+    "installTitle": "Inner Hunt'ı ana ekranınıza ekleyin",
     "installButton": "Ekle",
     "iosHint": "Safari'de paylaş ikonuna basıp \"Ana Ekrana Ekle\"yi seçin",
     "dismiss": "Kapat"

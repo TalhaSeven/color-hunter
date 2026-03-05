@@ -1,6 +1,6 @@
-# 🔍 Color Hunter — Mindful Color Hunt
+# 🔍 Inner Hunt — Mindful Color Hunt
 
-**Color Hunter** is a contemplative, multi-lingual Next.js web application designed to guide users through an introspective journey. It maps human emotional states to colors, numbers, and ultimately, to specific Divine Names (_Asma-ul Husna_) to offer deep, psychologically grounded reflections (_Tefekkür_).
+**Inner Hunt** is a contemplative, multi-lingual Next.js web application designed to guide users through an introspective journey. It maps human emotional states to colors, numbers, and ultimately, to specific Divine Names (_Asma-ul Husna_) to offer deep, psychologically grounded reflections (_Tefekkür_).
 
 Built with performance, accessibility, and internationalization at its core.
 
@@ -22,15 +22,15 @@ Built with performance, accessibility, and internationalization at its core.
 
 ## 🛠 Tech Stack
 
-| Category                  | Technology                                     |
-| ------------------------- | ---------------------------------------------- |
-| **Framework**             | Next.js 16 (App Router)                        |
-| **Language**              | TypeScript                                     |
-| **Styling**               | Tailwind CSS v4, Vanilla CSS Custom Properties |
-| **Animation**             | Framer Motion                                  |
-| **i18n**                  | next-intl                                      |
-| **Analytics**             | Vercel Analytics                               |
-| **Hosting**               | Vercel                                         |
+| Category      | Technology                                     |
+| ------------- | ---------------------------------------------- |
+| **Framework** | Next.js 16 (App Router)                        |
+| **Language**  | TypeScript                                     |
+| **Styling**   | Tailwind CSS v4, Vanilla CSS Custom Properties |
+| **Animation** | Framer Motion                                  |
+| **i18n**      | next-intl                                      |
+| **Analytics** | Vercel Analytics                               |
+| **Hosting**   | Vercel                                         |
 
 ---
 
