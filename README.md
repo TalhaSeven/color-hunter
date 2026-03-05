@@ -30,21 +30,9 @@ Built with performance, accessibility, and internationalization at its core.
 | **Animation**             | Framer Motion                                  |
 | **i18n**                  | next-intl                                      |
 | **Analytics**             | Vercel Analytics                               |
-| **Hosting (Recommended)** | Vercel                                         |
+| **Hosting**               | Vercel                                         |
 
 ---
-
-## 🚀 Running Locally
-
-```bash
-# Install dependencies
-pnpm install
-
-# Run the development server
-pnpm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## 📦 Production Readiness
 
