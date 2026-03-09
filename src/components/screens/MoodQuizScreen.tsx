@@ -11,7 +11,7 @@ interface MoodQuizScreenProps {
 }
 
 export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
-  const t = useTranslations();
+  const t = useTranslations("quiz");
   const [step, setStep] = useState(0); // 0 = Q1, 1 = Q2
   const [answers, setAnswers] = useState<string[]>([]);
 
@@ -77,7 +77,7 @@ export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
           <div className="screen-label">{t("mood.stepLabel")}</div>
 
           <h2 className="screen-title" style={{ maxWidth: 320 }}>
-            {t(currentQuestion.titleKey as Parameters<typeof t>[0])}
+            {t(currentQuestion.titleKey)}
           </h2>
 
           {/* Options */}
@@ -133,7 +133,7 @@ export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
                     textAlign: "center",
                   }}
                 >
-                  {t(option.labelKey as Parameters<typeof t>[0])}
+                  {t(option.labelKey)}
                 </span>
               </motion.button>
             ))}

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
 
 const languages = [
   { code: "tr" as const, label: "TR", flag: "🇹🇷" },
@@ -21,15 +22,29 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const current = languages.find((l) => l.code === locale)!;
+  const current =
+    languages.find((l) => l.code === locale) ??
+    languages.find((l) => l.code === routing.defaultLocale) ??
+    languages[0];
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node))
+      if (!(e.target instanceof Node)) return;
+      if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false);
+      }
     };
+
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
     document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("keydown", onEscape);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("keydown", onEscape);
+    };
   }, []);
 
   const handleChange = (newLocale: "tr" | "en" | "de" | "es") => {
@@ -40,11 +55,10 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div
+    <nav
       ref={ref}
       className="fixed z-50"
       style={{ top: 20, right: 20 }}
-      role="navigation"
       aria-label={t("label")}
     >
       <button
@@ -129,6 +143,6 @@ export default function LanguageSwitcher() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </nav>
   );
 }

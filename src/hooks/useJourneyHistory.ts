@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export interface JourneyRecord {
     id: string;
@@ -36,11 +36,7 @@ function saveRecords(records: JourneyRecord[]): void {
 }
 
 export function useJourneyHistory() {
-    const [journeys, setJourneys] = useState<JourneyRecord[]>([]);
-
-    useEffect(() => {
-        setJourneys(loadRecords());
-    }, []);
+    const [journeys, setJourneys] = useState<JourneyRecord[]>(() => loadRecords());
 
     const saveJourney = useCallback((record: Omit<JourneyRecord, "id" | "date">) => {
         const newRecord: JourneyRecord = {

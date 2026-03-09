@@ -1,28 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Mood } from "@/types";
 import { moods } from "@/data/moods";
+import type { MoodId } from "@/data/quizData";
 
 interface MoodScreenProps {
-  onSelect: (moodId: "A" | "B" | "C" | "D") => void;
+  onSelect: (moodId: MoodId) => void;
 }
 
 export default function MoodScreen({ onSelect }: MoodScreenProps) {
   const t = useTranslations("mood");
-  const [selected, setSelected] = useState<string | null>(null);
+  const prefersReduced = useReducedMotion();
+  const [selected, setSelected] = useState<MoodId | null>(null);
 
   const handleContinue = () => {
-    if (selected) onSelect(selected as "A" | "B" | "C" | "D");
+    if (selected) onSelect(selected);
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: prefersReduced ? 0 : 30 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      exit={{ opacity: 0, y: prefersReduced ? 0 : -20 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
       className="flex flex-col items-center justify-center min-h-[100dvh] px-5 py-10"
       style={{ gap: 28 }}

@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export default function NotFound() {
   const t = useTranslations("errors");
@@ -14,7 +15,7 @@ export default function NotFound() {
       >
         {t("notFound")}
       </p>
-      <a
+      <Link
         href="/"
         style={{
           color: "var(--color-gold)",
@@ -24,7 +25,7 @@ export default function NotFound() {
         }}
       >
         {t("restartLink")}
-      </a>
+      </Link>
     </div>
   );
 }

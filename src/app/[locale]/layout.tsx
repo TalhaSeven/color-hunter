@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { Amiri, Playfair_Display, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import AxeProvider from "@/components/providers/AxeProvider";
 
 const locales = ["tr", "en", "de", "es"] as const;
 
@@ -40,6 +42,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
 
   const baseUrl = "https://innerhunt.com";
+  const canonicalUrl = locale === "tr" ? baseUrl : `${baseUrl}/${locale}`;
 
   return {
     metadataBase: new URL(baseUrl),
@@ -52,7 +55,7 @@ export async function generateMetadata({
       title: "Inner Hunt",
     },
     icons: {
-      apple: "/icon-192.png",
+      apple: "/apple-touch-icon.png",
     },
     alternates: {
       canonical: locale === "tr" ? baseUrl : `${baseUrl}/${locale}`,
@@ -70,6 +73,15 @@ export async function generateMetadata({
       locale,
       alternateLocale: locales.filter((l) => l !== locale),
       type: "website",
+      url: canonicalUrl,
+      siteName: "Inner Hunt",
+      images: [{ url: `${baseUrl}/${locale}/opengraph-image` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: [`${baseUrl}/${locale}/opengraph-image`],
     },
   };
 }
@@ -134,7 +146,9 @@ export default async function LocaleLayout({
       </head>
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <AxeProvider />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

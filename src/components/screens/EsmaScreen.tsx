@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { track } from "@vercel/analytics";
 import { EsmaBase } from "@/types";
@@ -25,12 +25,14 @@ export default function EsmaScreen({
 }: EsmaScreenProps) {
   const tEsma = useTranslations("esma");
   const tDetails = useTranslations("esmaDetails");
+  const prefersReduced = useReducedMotion();
+  const [copied, setCopied] = useState(false);
   const esmaColor = selectedColor || accentColor;
 
   const meaning = tDetails(`${esma.number}.meaning`);
   const tefekkur = tDetails(`${esma.number}.tefekkur`);
 
-  const handleShare = useCallback(async () => {
+  const handleShare = async () => {
     track("journey_shared", { esma_name: esma.name, esma_number: esma.number });
     const text = `✨ ${esma.name} — ${moodEmoji} ${moodName}\n"${meaning}"\n\n${tefekkur}\n\n📿 Zikir: ${esma.dhikrCount} defa\n\n— Inner Hunt 🔍\nhttps://innerhunt.com`;
     if (navigator.share) {
@@ -41,13 +43,14 @@ export default function EsmaScreen({
       }
     } else if (navigator.clipboard) {
       await navigator.clipboard.writeText(text);
-      alert("Metin panoya kopyalandı!");
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
     }
-  }, [esma.name, esma.number, meaning, tefekkur, moodEmoji, moodName]);
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: prefersReduced ? 0 : 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
@@ -88,7 +91,7 @@ export default function EsmaScreen({
             height: 180,
             background: `radial-gradient(circle, ${esmaColor}22, ${esmaColor}08)`,
             border: `1.5px solid ${esmaColor}44`,
-            animation: "pulse-glow 3s ease-in-out infinite",
+            animation: prefersReduced ? "none" : "pulse-glow 3s ease-in-out infinite",
             "--esma-color": esmaColor,
           } as React.CSSProperties
         }
@@ -302,7 +305,7 @@ export default function EsmaScreen({
             e.currentTarget.style.boxShadow = "none";
           }}
         >
-          {tEsma("shareButton")}
+          {copied ? tEsma("copiedButton") : tEsma("shareButton")}
         </button>
       </motion.div>
     </motion.div>

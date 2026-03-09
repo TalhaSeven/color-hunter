@@ -13,6 +13,7 @@ export default function AmbientBackground({
     <div
       className="fixed inset-0 overflow-hidden pointer-events-none"
       style={{ zIndex: 0 }}
+      aria-hidden="true"
     >
       {/* Ambient blob 1 — top-left */}
       <motion.div

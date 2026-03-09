@@ -3,6 +3,8 @@ import ColorHunterApp from "@/components/ColorHunterApp";
 
 const locales = ["tr", "en", "de", "es"] as const;
 
+export const dynamic = "force-static";
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }

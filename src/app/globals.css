@@ -7,8 +7,8 @@
   --color-gold-light: #e8c97a;
   --color-gold-dark: #a07830;
   --color-text: #f0ebe0;
-  --color-text-dim: #9a9080;
-  --color-text-muted: #6a6050;
+  --color-text-dim: #b7ae9f;
+  --color-text-muted: #908675;
 
   --font-amiri: "Amiri", serif;
   --font-playfair: "Playfair Display", serif;
@@ -21,6 +21,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -35,8 +36,21 @@ body {
   font-family: var(--font-body);
   min-height: 100vh;
   overflow-x: hidden;
+  overscroll-behavior: none;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid #c9a84c;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Grain overlay */
@@ -102,15 +116,22 @@ body::after {
 }
 
 .btn-gold:active {
-  transform: translateY(0);
+  transform: scale(0.97);
 }
 
 .btn-gold:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
+  color: #5f553f;
   cursor: not-allowed;
   pointer-events: none;
   transform: none;
   box-shadow: none;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
 }
 
 /* Screen label */

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 
@@ -11,17 +11,29 @@ interface BeforeInstallPromptEvent extends Event {
 
 export default function InstallPrompt() {
   const t = useTranslations("pwa");
+  const isHydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const [showIOSPrompt, setShowIOSPrompt] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
+  const isStandalone = isHydrated
+    ? window.matchMedia("(display-mode: standalone)").matches
+    : false;
+  const isIOSPrompt =
+    isHydrated &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+    !(window as unknown as { MSStream?: unknown }).MSStream &&
+    !isStandalone;
+  const storedDismissed =
+    isHydrated && sessionStorage.getItem("install-dismissed") === "true";
+  const isDismissed = dismissed || storedDismissed;
+
   useEffect(() => {
-    if (sessionStorage.getItem("install-dismissed")) {
-      setDismissed(true);
-      return;
-    }
-    if (window.matchMedia("(display-mode: standalone)").matches) return;
+    if (!isHydrated || isDismissed || isStandalone) return;
 
     const handler = (e: Event) => {
       e.preventDefault();
@@ -29,14 +41,8 @@ export default function InstallPrompt() {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
-    const isIOS =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-      !(window as unknown as { MSStream?: unknown }).MSStream;
-    if (isIOS && !window.matchMedia("(display-mode: standalone)").matches)
-      setShowIOSPrompt(true);
-
     return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
+  }, [isDismissed, isHydrated, isStandalone]);
 
   const handleInstall = async () => {
     if (!deferredPrompt) return;
@@ -51,7 +57,7 @@ export default function InstallPrompt() {
     sessionStorage.setItem("install-dismissed", "true");
   };
 
-  const showBanner = !dismissed && (deferredPrompt || showIOSPrompt);
+  const showBanner = isHydrated && !isDismissed && (deferredPrompt || isIOSPrompt);
 
   return (
     <AnimatePresence>

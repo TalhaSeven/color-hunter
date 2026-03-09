@@ -86,13 +86,10 @@ export type SoundMode = "rain" | "tone" | "off";
 export function useAmbientSound(mode: SoundMode = "rain") {
     const ctxRef = useRef<AudioContext | null>(null);
     const nodeRef = useRef<{ start: () => void; stop: () => void } | null>(null);
-    const [enabled, setEnabled] = useState(false);
-
-    // Load stored preference
-    useEffect(() => {
-        const stored = localStorage.getItem(PREF_KEY);
-        if (stored === "true") setEnabled(true);
-    }, []);
+    const [enabled, setEnabled] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return localStorage.getItem(PREF_KEY) === "true";
+    });
 
     const stop = useCallback(() => {
         nodeRef.current?.stop();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer, useMemo, useEffect } from "react";
+import { useReducer, useMemo, useEffect, useRef, useSyncExternalStore } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { track } from "@vercel/analytics";
@@ -16,7 +16,7 @@ import InstallPrompt from "@/components/ui/InstallPrompt";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import SoundToggle from "@/components/ui/SoundToggle";
 import IntroScreen from "@/components/screens/IntroScreen";
-import MoodQuizScreen from "@/components/screens/MoodQuizScreen";
+import MoodScreen from "@/components/screens/MoodScreen";
 import ColorScreen from "@/components/screens/ColorScreen";
 import NumberScreen from "@/components/screens/NumberScreen";
 import EsmaScreen from "@/components/screens/EsmaScreen";
@@ -30,36 +30,76 @@ const initialState: AppState = {
   revealedEsma: null,
 };
 
+const APP_STEPS = [0, 1, 2, 3, 4] as const;
+
+function toAppStep(value: number): AppStep {
+  const bounded = Math.min(4, Math.max(0, Math.round(value)));
+  return APP_STEPS[bounded];
+}
+
+const APP_STATE_KEY = "inner_hunt_app_state";
+
+function parseSavedState(raw: string | null): AppState {
+  if (!raw) return initialState;
+
+  try {
+    const parsed = JSON.parse(raw) as Partial<AppState>;
+    const safeStep =
+      typeof parsed.currentStep === "number" &&
+      parsed.currentStep >= 0 &&
+      parsed.currentStep <= 4
+        ? parsed.currentStep
+        : 0;
+    const safeMood = moods.some((m) => m.id === parsed.selectedMood)
+      ? parsed.selectedMood ?? null
+      : null;
+    const safeNumber =
+      typeof parsed.selectedNumber === "number" ? parsed.selectedNumber : null;
+    const safeEsma = safeNumber ? esmaData[safeNumber] ?? null : null;
+
+    return {
+      currentStep: toAppStep(safeStep),
+      selectedMood: safeMood,
+      selectedColor:
+        typeof parsed.selectedColor === "string" ? parsed.selectedColor : null,
+      selectedNumber: safeNumber,
+      revealedEsma: safeEsma,
+    };
+  } catch {
+    return initialState;
+  }
+}
+
 function reducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     case "NEXT_STEP":
       return {
         ...state,
-        currentStep: Math.min(state.currentStep + 1, 4) as AppStep,
+        currentStep: toAppStep(state.currentStep + 1),
       };
     case "PREV_STEP":
       return {
         ...state,
-        currentStep: Math.max(state.currentStep - 1, 0) as AppStep,
+        currentStep: toAppStep(state.currentStep - 1),
       };
     case "SET_MOOD":
       return {
         ...state,
         selectedMood: action.payload,
-        currentStep: 2 as AppStep,
+        currentStep: 2,
       };
     case "SET_COLOR":
       return {
         ...state,
         selectedColor: action.payload,
-        currentStep: 3 as AppStep,
+        currentStep: 3,
       };
     case "SET_NUMBER":
       return {
         ...state,
         selectedNumber: action.payload,
         revealedEsma: action.esma,
-        currentStep: 4 as AppStep,
+        currentStep: 4,
       };
     case "RESET":
       return initialState;
@@ -69,20 +109,35 @@ function reducer(state: AppState, action: AppAction): AppState {
 }
 
 export default function ColorHunterApp() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState,
+    () =>
+      typeof window === "undefined"
+        ? initialState
+        : parseSavedState(sessionStorage.getItem(APP_STATE_KEY)),
+  );
+  const isHydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const hasSkippedInitialJourneySave = useRef(false);
   const tMood = useTranslations("mood");
   const tNav = useTranslations("navigation");
 
   const { journeys, saveJourney, clearHistory } = useJourneyHistory();
+  const renderedState = isHydrated ? state : initialState;
+  const renderedJourneys = isHydrated ? journeys : [];
 
   // Sound mode: calm tone on intro, rain on esma reveal
-  const soundMode = state.currentStep === 4 ? "rain" : "tone";
+  const soundMode = renderedState.currentStep === 4 ? "rain" : "tone";
   const { enabled: soundEnabled, toggle: toggleSound } =
     useAmbientSound(soundMode);
 
   const currentMood = useMemo(
-    () => moods.find((m) => m.id === state.selectedMood),
-    [state.selectedMood],
+    () => moods.find((m) => m.id === renderedState.selectedMood),
+    [renderedState.selectedMood],
   );
 
   const accentColor = currentMood?.accentColor ?? "#c9a84c";
@@ -120,8 +175,12 @@ export default function ColorHunterApp() {
     ? tMood(`moods.${currentMood.id}.name`)
     : "";
 
-  // Save journey when esma is revealed
   useEffect(() => {
+    if (!hasSkippedInitialJourneySave.current) {
+      hasSkippedInitialJourneySave.current = true;
+      return;
+    }
+
     if (
       state.currentStep === 4 &&
       state.revealedEsma &&
@@ -139,20 +198,24 @@ export default function ColorHunterApp() {
         color: state.selectedColor,
       });
     }
-    // Only run when we enter step 4
+    // Only run when we enter step 4.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.currentStep]);
 
+  useEffect(() => {
+    sessionStorage.setItem(APP_STATE_KEY, JSON.stringify(state));
+  }, [state]);
+
   return (
-    <div className="relative w-full min-h-[100dvh] overflow-hidden">
+    <main className="relative w-full min-h-dvh overflow-hidden" aria-label="Inner Hunt">
       <AmbientBackground accentColor={accentColor} />
-      <ProgressBar currentStep={state.currentStep} />
+      <ProgressBar currentStep={renderedState.currentStep} />
       <LanguageSwitcher />
-      <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+      <SoundToggle enabled={isHydrated ? soundEnabled : false} onToggle={toggleSound} />
 
       {/* Back button */}
       <AnimatePresence>
-        {state.currentStep > 0 && state.currentStep < 4 && (
+        {renderedState.currentStep > 0 && (
           <motion.button
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -188,18 +251,16 @@ export default function ColorHunterApp() {
 
       {/* Screens */}
       <AnimatePresence mode="wait">
-        {state.currentStep === 0 && (
+        {renderedState.currentStep === 0 && (
           <IntroScreen
             key="intro"
             onStart={handleStart}
-            journeys={journeys}
+            journeys={renderedJourneys}
             onClearHistory={clearHistory}
           />
         )}
-        {state.currentStep === 1 && (
-          <MoodQuizScreen key="mood-quiz" onSelect={handleMoodSelect} />
-        )}
-        {state.currentStep === 2 && currentMood && (
+        {renderedState.currentStep === 1 && <MoodScreen key="mood" onSelect={handleMoodSelect} />}
+        {renderedState.currentStep === 2 && currentMood && (
           <ColorScreen
             key="color"
             colors={currentMood.colors}
@@ -207,7 +268,7 @@ export default function ColorHunterApp() {
             onSelect={handleColorSelect}
           />
         )}
-        {state.currentStep === 3 && currentMood && (
+        {renderedState.currentStep === 3 && currentMood && (
           <NumberScreen
             key="number"
             numbers={currentMood.numbers}
@@ -215,11 +276,13 @@ export default function ColorHunterApp() {
             onSelect={handleNumberSelect}
           />
         )}
-        {state.currentStep === 4 && state.revealedEsma && currentMood && (
+        {renderedState.currentStep === 4 &&
+          renderedState.revealedEsma &&
+          currentMood && (
           <EsmaScreen
             key="esma"
-            esma={state.revealedEsma}
-            selectedColor={state.selectedColor ?? accentColor}
+            esma={renderedState.revealedEsma}
+            selectedColor={renderedState.selectedColor ?? accentColor}
             accentColor={accentColor}
             moodName={translatedMoodName}
             moodEmoji={currentMood.emoji}
@@ -229,6 +292,6 @@ export default function ColorHunterApp() {
       </AnimatePresence>
 
       <InstallPrompt />
-    </div>
+    </main>
   );
 }

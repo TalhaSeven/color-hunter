@@ -1,7 +1,8 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { JourneyRecord } from "@/hooks/useJourneyHistory";
 
 interface JourneyHistoryProps {
@@ -41,12 +42,14 @@ export default function JourneyHistory({
   onClear,
 }: JourneyHistoryProps) {
   const t = useTranslations("history");
-  const locale =
-    typeof window !== "undefined"
-      ? document.documentElement.lang || "en"
-      : "en";
+  const locale = useLocale();
+  const isHydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
-  if (journeys.length === 0) return null;
+  if (!isHydrated || journeys.length === 0) return null;
 
   const recent = journeys.slice(0, 3);
 
@@ -160,7 +163,7 @@ export default function JourneyHistory({
                 <span
                   style={{ fontSize: 10, color: "var(--color-text-muted)" }}
                 >
-                  {timeAgo(j.date, locale)}
+                  {isHydrated ? timeAgo(j.date, locale) : ""}
                 </span>
               </div>
             </motion.div>

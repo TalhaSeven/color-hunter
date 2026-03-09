@@ -110,6 +110,7 @@
     "label": "{number}. Esma",
     "tefekkurTitle": "✦ Tefekkür Rehberi",
     "shareButton": "Paylaş ↗",
+    "copiedButton": "Kopyalandı ✓",
     "restartButton": "Yeniden Başla",
     "dhikrLabel": "Zikir",
     "dhikrUnit": "defa"
@@ -278,7 +279,7 @@
   },
   "navigation": {
     "backButton": "Geri",
-    "progressLabel": "İlerleme: %{percent}%"
+    "progressLabel": "İlerleme: {percent}%"
   },
   "errors": {
     "notFound": "Sayfa bulunamadı.",

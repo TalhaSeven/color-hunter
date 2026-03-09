@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 interface NumberScreenProps {
@@ -16,6 +16,7 @@ export default function NumberScreen({
   onSelect,
 }: NumberScreenProps) {
   const t = useTranslations("number");
+  const prefersReduced = useReducedMotion();
   const [selected, setSelected] = useState<number | null>(null);
 
   const handleReveal = () => {
@@ -24,9 +25,9 @@ export default function NumberScreen({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: prefersReduced ? 0 : 30 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      exit={{ opacity: 0, y: prefersReduced ? 0 : -20 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
       className="flex flex-col items-center justify-center min-h-[100dvh] px-5 py-10"
       style={{ gap: 28 }}

@@ -3,33 +3,33 @@ export type MoodId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
 export interface QuizOption {
     id: string;
     emoji: string;
-    labelKey: string; // i18n key
+    labelKey: string;
 }
 
 export interface QuizQuestion {
     id: string;
-    titleKey: string; // i18n key
+    titleKey: string;
     options: QuizOption[];
 }
 
 export const quizQuestions: QuizQuestion[] = [
     {
         id: 'q1',
-        titleKey: 'quiz.q1.title',
+        titleKey: 'q1.title',
         options: [
-            { id: 'high', emoji: '⚡', labelKey: 'quiz.q1.high' },
-            { id: 'mid', emoji: '🌤', labelKey: 'quiz.q1.mid' },
-            { id: 'low', emoji: '🌙', labelKey: 'quiz.q1.low' },
+            { id: 'high', emoji: '⚡', labelKey: 'q1.high' },
+            { id: 'mid', emoji: '🌤', labelKey: 'q1.mid' },
+            { id: 'low', emoji: '🌙', labelKey: 'q1.low' },
         ],
     },
     {
         id: 'q2',
-        titleKey: 'quiz.q2.title',
+        titleKey: 'q2.title',
         options: [
-            { id: 'love', emoji: '💛', labelKey: 'quiz.q2.love' },
-            { id: 'power', emoji: '🔥', labelKey: 'quiz.q2.power' },
-            { id: 'peace', emoji: '🌿', labelKey: 'quiz.q2.peace' },
-            { id: 'chaos', emoji: '🌊', labelKey: 'quiz.q2.chaos' },
+            { id: 'love', emoji: '💛', labelKey: 'q2.love' },
+            { id: 'power', emoji: '🔥', labelKey: 'q2.power' },
+            { id: 'peace', emoji: '🌿', labelKey: 'q2.peace' },
+            { id: 'chaos', emoji: '🌊', labelKey: 'q2.chaos' },
         ],
     },
 ];
