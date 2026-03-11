@@ -9,9 +9,10 @@ interface ColorScreenProps {
   colors: ColorOption[];
   accentColor: string;
   onSelect: (hex: string) => void;
+  onBack: () => void;
 }
 
-export default function ColorScreen({ colors, onSelect }: ColorScreenProps) {
+export default function ColorScreen({ colors, accentColor, onSelect, onBack }: ColorScreenProps) {
   const t = useTranslations("color");
   const prefersReduced = useReducedMotion();
   const [selected, setSelected] = useState<string | null>(null);
@@ -30,82 +31,143 @@ export default function ColorScreen({ colors, onSelect }: ColorScreenProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: prefersReduced ? 0 : 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: prefersReduced ? 0 : -20 }}
-      transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-      className="flex flex-col items-center justify-center min-h-[100dvh] px-5 py-10"
-      style={{ gap: 28 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+      transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
+      className="flex flex-col min-h-[100dvh] pt-24 pb-24 px-6 lg:px-20 relative z-10"
     >
-      <div className="screen-label">{t("stepLabel")}</div>
-      <h2 className="screen-title">{t("title")}</h2>
+      <div className="max-w-4xl mx-auto w-full h-full flex flex-col">
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.19, 1, 0.22, 1] }}
+          className="mb-16 shrink-0"
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="h-[1px] w-8" style={{ background: accentColor }} />
+            <div className="screen-label font-bold !tracking-[8px]" style={{ color: accentColor }}>{t("stepLabel")}</div>
+          </div>
+          <h2 className="screen-title text-left !text-4xl md:!text-6xl">{t("title")}</h2>
+        </motion.div>
 
-      <div
-        className="flex flex-wrap justify-center"
-        style={{ gap: 16, maxWidth: 500 }}
-      >
-        {colors.map((color, i) => {
-          const isSelected = selected === color.hex;
-          return (
-            <motion.button
-              key={color.hex}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.35, delay: i * 0.07 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setSelected(color.hex)}
-              aria-label={getColorName(color.hex)}
-              className="relative cursor-pointer shrink-0"
-              style={{
-                width: 72,
-                height: 72,
-                borderRadius: "50%",
-                background: color.hex,
-                border: isSelected
-                  ? "3px solid white"
-                  : "3px solid transparent",
-                transition:
-                  "transform 0.3s, box-shadow 0.3s, border-color 0.3s",
-                transform: isSelected ? "scale(1.18)" : "scale(1)",
-                boxShadow: isSelected ? `0 0 30px -4px ${color.hex}` : "none",
-                color: color.hex,
-              }}
-              onMouseEnter={(e) => {
-                if (!isSelected)
-                  e.currentTarget.style.transform = "scale(1.12)";
-              }}
-              onMouseLeave={(e) => {
-                if (!isSelected) e.currentTarget.style.transform = "scale(1)";
-              }}
-            >
-              <span
-                className="absolute left-1/2 whitespace-nowrap pointer-events-none"
+        {/* Ambient Splints / Color Strips */}
+        <div className="flex-1 flex flex-col gap-3 min-h-[40vh] max-h-[60vh]">
+          {colors.map((color, i) => {
+            const isSelected = selected === color.hex;
+            const notSelectedButActive = selected !== null && !isSelected;
+            
+            return (
+              <motion.button
+                key={color.hex}
+                initial={{ opacity: 0, scaleX: 0.8 }}
+                animate={{ 
+                  opacity: notSelectedButActive ? 0.3 : 1, 
+                  scaleX: 1,
+                  flexGrow: isSelected ? 3 : 1 
+                }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.19, 1, 0.22, 1] }}
+                onClick={() => setSelected(color.hex)}
+                aria-label={getColorName(color.hex)}
+                className="group relative cursor-pointer w-full overflow-hidden text-left"
                 style={{
-                  bottom: -22,
-                  transform: "translateX(-50%)",
-                  fontSize: 10,
-                  color: "var(--color-text-dim)",
-                  letterSpacing: 0.3,
-                  opacity: isSelected ? 1 : 0,
-                  transition: "opacity 0.2s",
+                  background: color.hex,
+                  transformOrigin: i % 2 === 0 ? "left" : "right"
                 }}
               >
-                {getColorName(color.hex)}
-              </span>
-            </motion.button>
-          );
-        })}
+                {/* Inner shadow/vignette for depth */}
+                <div 
+                  className="absolute inset-0 opacity-40 mix-blend-multiply" 
+                  style={{ background: "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.8) 100%)" }}
+                />
+                
+                {/* Active glow */}
+                <div 
+                  className="absolute inset-0 transition-opacity duration-700" 
+                  style={{ 
+                    background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)`,
+                    opacity: isSelected ? 1 : 0 
+                  }}
+                />
+
+                {/* Color Name Typography */}
+                <div className="relative z-10 h-full flex items-center px-8 lg:px-16 mix-blend-exclusion">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-cinzel)",
+                      fontSize: isSelected ? "clamp(24px, 4vw, 40px)" : "clamp(16px, 2vw, 24px)",
+                      color: "#fff",
+                      letterSpacing: "4px",
+                      textTransform: "uppercase",
+                      transition: "all 0.6s cubic-bezier(0.19, 1, 0.22, 1)",
+                      opacity: isSelected ? 1 : 0.6
+                    }}
+                    className="group-hover:opacity-100 group-hover:tracking-[6px]"
+                  >
+                    {getColorName(color.hex)}
+                  </span>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+        
+        {/* Navigation Actions */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-16 flex justify-between items-center shrink-0"
+        >
+          <button
+            onClick={onBack}
+            className="group flex items-center gap-2 cursor-pointer"
+            style={{
+              padding: "14px 24px",
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderLeft: `2px solid ${accentColor}`,
+              color: "var(--color-text-dim)",
+              fontFamily: "var(--font-cinzel)",
+              fontSize: 13,
+              letterSpacing: 2,
+              textTransform: "uppercase" as const,
+              transition: "all 0.3s cubic-bezier(0.19, 1, 0.22, 1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+              e.currentTarget.style.color = "var(--color-text)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+              e.currentTarget.style.color = "var(--color-text-dim)";
+            }}
+          >
+            ← {t("backButton")}
+          </button>
+          <button
+            onClick={handleContinue}
+            disabled={!selected}
+            className="btn-gold group"
+            style={{ 
+              borderColor: selected ? selected : "rgba(212, 175, 55, 0.4)",
+              color: selected ? "#fff" : "var(--color-gold-light)"
+            }}
+          >
+            <span className="flex items-center gap-3 relative z-10">
+              {t("continueButton")}
+              <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+            </span>
+            {selected && (
+               <div 
+                 className="absolute inset-0 opacity-20 transition-opacity duration-300 group-hover:opacity-40" 
+                 style={{ background: selected }}
+               />
+            )}
+          </button>
+        </motion.div>
       </div>
-
-      <div style={{ height: 4 }} />
-
-      <button
-        onClick={handleContinue}
-        disabled={!selected}
-        className="btn-gold"
-      >
-        {t("continueButton")}
-      </button>
     </motion.div>
   );
 }

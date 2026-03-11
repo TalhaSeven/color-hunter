@@ -27,110 +27,125 @@ export default function IntroScreen({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: prefersReduced ? 0 : 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: prefersReduced ? 0 : -20 }}
-      transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-      className="flex flex-col items-center justify-center min-h-dvh px-5 py-10 text-center"
-      style={{ gap: "24px" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+      transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
+      className="relative flex flex-col min-h-[100dvh] pt-32 pb-24 px-6 lg:px-20 z-10"
     >
+      {/* Absolute decorative typography */}
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="flex items-center justify-center rounded-full"
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 0.05, x: 0 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+        className="absolute top-[5%] -left-[5%] pointer-events-none select-none whitespace-nowrap"
         style={{
-          width: 80,
-          height: 80,
-          border: "1.5px solid var(--color-gold)",
-          background: "rgba(201, 168, 76, 0.08)",
-          fontSize: 32,
+          fontFamily: "var(--font-cinzel)",
+          fontSize: "clamp(120px, 30vw, 300px)",
+          fontWeight: 800,
+          lineHeight: 0.8,
+          color: "var(--color-gold)",
         }}
       >
-        🔍
+        HUNT
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        className="screen-label"
-      >
-        {t("badge")}
-      </motion.div>
+      <div className="relative z-10 max-w-4xl mx-auto w-full flex-1 flex flex-col justify-center my-auto">
+        {/* Geometric compositional element instead of regular badge */}
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.19, 1, 0.22, 1] }}
+          className="origin-top mb-12"
+          style={{ width: "1px", height: "80px", background: "linear-gradient(to bottom, var(--color-gold), transparent)" }}
+        />
 
-      <motion.h1
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.25 }}
-        className="text-gradient-gold leading-[1.1]"
-        style={{
-          fontFamily: "var(--font-amiri)",
-          fontSize: "clamp(36px, 8vw, 64px)",
-        }}
-      >
-        {t("title")}
-      </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="screen-label mb-6 inline-block"
+        >
+          {t("badge")}
+        </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.35 }}
-        style={{
-          maxWidth: 380,
-          fontSize: 15,
-          lineHeight: 1.8,
-          color: "var(--color-text-dim)",
-        }}
-      >
-        {t("description")}
-      </motion.p>
+        {/* Ethereal Maximalist Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: !prefersReduced ? 40 : 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.19, 1, 0.22, 1] }}
+          className="leading-[0.9] tracking-tighter flex flex-col"
+          style={{
+            fontFamily: "var(--font-cinzel)",
+            fontSize: "clamp(50px, 12vw, 110px)",
+            fontWeight: 500,
+            textShadow: "0 20px 40px rgba(0,0,0,0.5)",
+            marginLeft: "-4px", // optical alignment
+          }}
+        >
+          <div className="pb-2"><span className="text-gradient-gold">{t("title").split(" ")[0]}</span></div>
+          <div style={{ paddingLeft: "8%" }}><span className="text-metallic italic">{t("title").split(" ").slice(1).join(" ")}</span></div>
+        </motion.h1>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.45 }}
-        className="flex flex-wrap justify-center"
-        style={{ gap: 8, maxWidth: 440 }}
-      >
-        {steps.map((label) => (
-          <span
-            key={label}
-            className="rounded-full"
-            style={{
-              background: "rgba(201, 168, 76, 0.1)",
-              border: "1px solid rgba(201, 168, 76, 0.2)",
-              padding: "6px 14px",
-              fontSize: 12,
-              color: "var(--color-gold)",
-              letterSpacing: 0.5,
-            }}
+        <motion.p
+          initial={{ opacity: 0, filter: "blur(5px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+          className="mt-10 mb-14"
+          style={{
+            maxWidth: 480,
+            fontSize: 16,
+            lineHeight: 1.8,
+            color: "var(--color-text-dim)",
+            letterSpacing: "0.2px"
+          }}
+        >
+          {t("description")}
+        </motion.p>
+
+        {/* Start Button & Steps Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-10"
+        >
+          <button
+            onClick={onStart}
+            className="btn-gold group relative"
+            style={{ marginLeft: 10 }}
           >
-            {label}
-          </span>
-        ))}
-      </motion.div>
+            <span className="relative z-10 flex items-center gap-3">
+              {t("startButton")}
+              <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+            </span>
+          </button>
 
-      <motion.button
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.55 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={onStart}
-        className="btn-gold cursor-pointer"
-        style={{
-          marginTop: 8,
-          padding: "16px 48px",
-          fontSize: 15,
-          letterSpacing: 1,
-          textTransform: "uppercase" as const,
-        }}
+          {/* Minimal Steps indicator */}
+          <div className="flex flex-col gap-2 border-l border-white/10 pl-5">
+            {steps.map((label, idx) => (
+              <div 
+                key={label}
+                className="flex items-center gap-3 text-xs tracking-[2px] uppercase"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                <span style={{ color: "var(--color-gold-dark)", opacity: 0.5 }}>0{idx + 1}</span>
+                {label}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Journey History Area - in normal flow below content */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="relative z-10 max-w-md mt-10 px-6 lg:px-20"
       >
-        {t("startButton")}
-      </motion.button>
-
-      {/* Journey History */}
-      <JourneyHistory journeys={journeys} onClear={onClearHistory} />
+        <JourneyHistory journeys={journeys} onClear={onClearHistory} />
+      </motion.div>
     </motion.div>
   );
 }

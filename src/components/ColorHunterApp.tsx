@@ -124,7 +124,6 @@ export default function ColorHunterApp() {
   );
   const hasSkippedInitialJourneySave = useRef(false);
   const tMood = useTranslations("mood");
-  const tNav = useTranslations("navigation");
 
   const { journeys, saveJourney, clearHistory } = useJourneyHistory();
   const renderedState = isHydrated ? state : initialState;
@@ -213,42 +212,6 @@ export default function ColorHunterApp() {
       <LanguageSwitcher />
       <SoundToggle enabled={isHydrated ? soundEnabled : false} onToggle={toggleSound} />
 
-      {/* Back button */}
-      <AnimatePresence>
-        {renderedState.currentStep > 0 && (
-          <motion.button
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -10 }}
-            transition={{ duration: 0.3 }}
-            onClick={handleBack}
-            className="fixed z-50 rounded-full flex items-center justify-center cursor-pointer"
-            style={{
-              top: 20,
-              left: 20,
-              width: 40,
-              height: 40,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "var(--color-text-dim)",
-              fontSize: 18,
-              transition: "all 0.2s",
-            }}
-            aria-label={tNav("backButton")}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-              e.currentTarget.style.color = "var(--color-text)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-              e.currentTarget.style.color = "var(--color-text-dim)";
-            }}
-          >
-            ←
-          </motion.button>
-        )}
-      </AnimatePresence>
-
       {/* Screens */}
       <AnimatePresence mode="wait">
         {renderedState.currentStep === 0 && (
@@ -259,13 +222,14 @@ export default function ColorHunterApp() {
             onClearHistory={clearHistory}
           />
         )}
-        {renderedState.currentStep === 1 && <MoodScreen key="mood" onSelect={handleMoodSelect} />}
+        {renderedState.currentStep === 1 && <MoodScreen key="mood" onSelect={handleMoodSelect} onBack={handleBack} />}
         {renderedState.currentStep === 2 && currentMood && (
           <ColorScreen
             key="color"
             colors={currentMood.colors}
             accentColor={currentMood.accentColor}
             onSelect={handleColorSelect}
+            onBack={handleBack}
           />
         )}
         {renderedState.currentStep === 3 && currentMood && (
@@ -274,6 +238,7 @@ export default function ColorHunterApp() {
             numbers={currentMood.numbers}
             accentColor={currentMood.accentColor}
             onSelect={handleNumberSelect}
+            onBack={handleBack}
           />
         )}
         {renderedState.currentStep === 4 &&

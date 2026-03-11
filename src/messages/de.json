@@ -19,6 +19,7 @@
     "stepLabel": "Schritt 1 / 3",
     "title": "Wie fühlst du dich heute?",
     "continueButton": "Weiter →",
+    "backButton": "Zurück",
     "moods": {
       "A": {
         "name": "Ausgeglichen · Lebendig",
@@ -58,6 +59,7 @@
     "stepLabel": "Schritt 2 / 3",
     "title": "Welche Farbe zieht dich an?",
     "continueButton": "Weiter →",
+    "backButton": "Zurück",
     "names": {
       "#00c853": "Lebhaftes Grün",
       "#76ff03": "Limonengrün",
@@ -104,7 +106,8 @@
     "stepLabel": "Schritt 3 / 3",
     "title": "Wähle eine Zahl aus deinem Inneren",
     "hint": "Jede Zahl entspricht einem göttlichen Namen…",
-    "continueButton": "Namen entdecken ✦"
+    "continueButton": "Namen entdecken ✦",
+    "backButton": "Zurück"
   },
   "esma": {
     "label": "{number}. Name",

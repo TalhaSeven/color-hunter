@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { Amiri, Playfair_Display, DM_Sans } from "next/font/google";
+import { Amiri, Cinzel, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import AxeProvider from "@/components/providers/AxeProvider";
@@ -18,18 +18,17 @@ const amiri = Amiri({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-body",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -136,7 +135,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir="ltr"
-      className={`${amiri.variable} ${playfair.variable} ${dmSans.variable}`}
+      className={`${amiri.variable} ${cinzel.variable} ${outfit.variable}`}
     >
       <head>
         <script

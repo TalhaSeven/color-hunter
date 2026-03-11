@@ -19,6 +19,7 @@
     "stepLabel": "Paso 1 / 3",
     "title": "¿Cómo te sientes hoy?",
     "continueButton": "Continuar →",
+    "backButton": "Atrás",
     "moods": {
       "A": {
         "name": "Equilibrado · Vibrante",
@@ -58,6 +59,7 @@
     "stepLabel": "Paso 2 / 3",
     "title": "¿Qué color te atrae más?",
     "continueButton": "Continuar →",
+    "backButton": "Atrás",
     "names": {
       "#00c853": "Verde vivo",
       "#76ff03": "Verde lima",
@@ -104,7 +106,8 @@
     "stepLabel": "Paso 3 / 3",
     "title": "Elige un número desde tu interior",
     "hint": "Cada número corresponde a un Nombre Divino…",
-    "continueButton": "Descubrir el Nombre ✦"
+    "continueButton": "Descubrir el Nombre ✦",
+    "backButton": "Atrás"
   },
   "esma": {
     "label": "{number}. Nombre",
