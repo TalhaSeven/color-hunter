@@ -57,7 +57,16 @@ export default function InstallPrompt() {
     sessionStorage.setItem("install-dismissed", "true");
   };
 
-  const showBanner = isHydrated && !isDismissed && (deferredPrompt || isIOSPrompt);
+  // Detect if running inside a native WebView (React Native, etc.)
+  const isWebView = isHydrated && (() => {
+    const ua = navigator.userAgent || "";
+    // React Native WebView, iOS WKWebView (no Safari), Android WebView
+    return /\bwv\b/i.test(ua) || /\breact[-\s]?native\b/i.test(ua) ||
+      (/iPhone|iPad|iPod/.test(ua) && !/Safari/.test(ua)) ||
+      /; wv\)/.test(ua);
+  })();
+
+  const showBanner = isHydrated && !isDismissed && !isWebView && (deferredPrompt || isIOSPrompt);
 
   return (
     <AnimatePresence>

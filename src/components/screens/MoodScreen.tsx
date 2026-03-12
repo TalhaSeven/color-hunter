@@ -58,13 +58,10 @@ export default function MoodScreen({ onSelect, onBack }: MoodScreenProps) {
                 transition={{ duration: 0.8, delay: 0.2 + i * 0.1, ease: [0.19, 1, 0.22, 1] }}
                 onClick={() => setSelected(mood.id)}
                 aria-label={t(`moods.${mood.id}.name`)}
-                className={`group text-left cursor-pointer relative overflow-hidden backdrop-blur-md w-full sm:w-[85%] ${alignmentOffset}`}
+                className={`group text-left cursor-pointer relative overflow-hidden backdrop-blur-md w-full sm:w-[85%] border px-10 py-8 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${alignmentOffset}`}
                 style={{
                   background: isSelected ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.015)",
-                  border: "1px solid",
                   borderColor: isSelected ? mood.accentColor : "rgba(255,255,255,0.05)",
-                  padding: "32px 40px",
-                  transition: "all 0.5s cubic-bezier(0.19, 1, 0.22, 1)",
                   boxShadow: isSelected ? `0 0 60px -15px ${mood.accentColor}` : "none",
                 }}
                 onMouseEnter={(e) => {
@@ -82,37 +79,30 @@ export default function MoodScreen({ onSelect, onBack }: MoodScreenProps) {
               >
                 {/* Massive bleeding background Emoji */}
                 <div 
-                  className="absolute -right-6 -bottom-10 opacity-[0.03] select-none pointer-events-none transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-[0.08]"
-                  style={{
-                    fontSize: "200px",
-                    lineHeight: 1,
-                    filter: "grayscale(100%)",
-                    transformOrigin: "bottom right",
-                  }}
+                  className="absolute -right-6 -bottom-10 opacity-[0.03] select-none pointer-events-none transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-[0.08] text-[200px] leading-none grayscale origin-bottom-right"
                 >
                   {mood.emoji}
                 </div>
 
                 {/* Left accent bar on selection */}
                 <div 
-                  className="absolute left-0 top-0 bottom-0 w-[4px] transition-all duration-500"
+                  className="absolute left-0 top-0 bottom-0 w-[4px] transition-all duration-500 origin-center"
                   style={{ 
                     background: mood.accentColor,
                     transform: isSelected ? "scaleY(1)" : "scaleY(0)",
-                    transformOrigin: "center"
                   }}
                 />
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div>
                     <div className="flex items-center gap-4 mb-2">
-                       <span style={{ fontSize: 24 }}>{mood.emoji}</span>
-                       <div style={{ fontFamily: "var(--font-cinzel)", fontSize: 22, fontWeight: 500, letterSpacing: "1px", color: isSelected ? "#fff" : "var(--color-text)" }}>
+                       <span className="text-2xl">{mood.emoji}</span>
+                       <div className={`font-cinzel text-[22px] font-medium tracking-[1px] ${isSelected ? "text-white" : "text-text"}`}>
                          {t(`moods.${mood.id}.name`)}
                        </div>
                     </div>
                     
-                    <div style={{ fontSize: 13, color: "var(--color-text-dim)", lineHeight: 1.6, letterSpacing: "0.5px" }}>
+                    <div className="text-[13px] text-text-dim leading-[1.6] tracking-[0.5px]">
                       {t(`moods.${mood.id}.tags`)}
                     </div>
                   </div>
@@ -122,12 +112,9 @@ export default function MoodScreen({ onSelect, onBack }: MoodScreenProps) {
                     {mood.colors.map((c, idx) => (
                       <div
                         key={c.hex}
-                        className="transition-transform duration-300 group-hover:scale-110"
+                        className="w-3 h-8 rounded-full transition-transform duration-300 group-hover:scale-110"
                         style={{ 
-                          width: 12, 
-                          height: 32, 
                           backgroundColor: c.hex,
-                          borderRadius: "100px",
                           transform: `translateY(${idx % 2 === 0 ? '4px' : '-4px'})`
                         }}
                       />
@@ -148,27 +135,7 @@ export default function MoodScreen({ onSelect, onBack }: MoodScreenProps) {
         >
           <button
             onClick={onBack}
-            className="group flex items-center gap-2 cursor-pointer"
-            style={{
-              padding: "14px 24px",
-              background: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderLeft: "2px solid var(--color-gold)",
-              color: "var(--color-text-dim)",
-              fontFamily: "var(--font-cinzel)",
-              fontSize: 13,
-              letterSpacing: 2,
-              textTransform: "uppercase" as const,
-              transition: "all 0.3s cubic-bezier(0.19, 1, 0.22, 1)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-              e.currentTarget.style.color = "var(--color-text)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-              e.currentTarget.style.color = "var(--color-text-dim)";
-            }}
+            className="group flex items-center gap-2 cursor-pointer px-6 py-3.5 bg-white/[0.02] border border-white/[0.08] border-l-2 border-l-gold text-text-dim font-cinzel text-[13px] tracking-[2px] uppercase transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] hover:bg-white/[0.06] hover:text-text"
           >
             ← {t("backButton")}
           </button>

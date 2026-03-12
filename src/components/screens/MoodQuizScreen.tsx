@@ -43,21 +43,18 @@ export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-      className="flex flex-col items-center justify-center min-h-[100dvh] px-5 py-10"
-      style={{ gap: 32 }}
+      className="flex flex-col items-center justify-center min-h-[100dvh] px-5 py-10 gap-8"
     >
       {/* Step indicator */}
-      <div className="flex" style={{ gap: 6 }}>
+      <div className="flex gap-1.5">
         {quizQuestions.map((_, i) => (
           <div
             key={i}
+            className="h-1 rounded-sm transition-all duration-400"
             style={{
               width: i === step ? 20 : 8,
-              height: 4,
-              borderRadius: 2,
               background:
                 i <= step ? "var(--color-gold)" : "rgba(255,255,255,0.15)",
-              transition: "all 0.4s",
             }}
           />
         ))}
@@ -71,25 +68,22 @@ export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="flex flex-col items-center text-center"
-          style={{ gap: 28, width: "100%", maxWidth: 440 }}
+          className="flex flex-col items-center text-center gap-7 w-full max-w-[440px]"
         >
           <div className="screen-label">{t("mood.stepLabel")}</div>
 
-          <h2 className="screen-title" style={{ maxWidth: 320 }}>
+          <h2 className="screen-title max-w-[320px]">
             {t(currentQuestion.titleKey)}
           </h2>
 
           {/* Options */}
           <div
+            className="grid w-full gap-3"
             style={{
-              display: "grid",
               gridTemplateColumns:
                 currentQuestion.options.length === 3
                   ? "1fr 1fr 1fr"
                   : "1fr 1fr",
-              gap: 12,
-              width: "100%",
             }}
           >
             {currentQuestion.options.map((option, i) => (
@@ -100,39 +94,10 @@ export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
                 transition={{ duration: 0.35, delay: i * 0.07 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleOptionSelect(option.id)}
-                className="cursor-pointer"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "20px 12px",
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 20,
-                  cursor: "pointer",
-                  transition: "all 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.07)";
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.4)";
-                  e.currentTarget.style.transform = "translateY(-3px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
+                className="cursor-pointer flex flex-col items-center gap-2.5 px-3 py-5 bg-white/[0.03] border border-white/[0.08] rounded-[20px] transition-all duration-250 hover:bg-white/[0.07] hover:border-gold/40 hover:-translate-y-[3px]"
               >
-                <span style={{ fontSize: 28 }}>{option.emoji}</span>
-                <span
-                  style={{
-                    fontSize: 12,
-                    color: "var(--color-text-dim)",
-                    lineHeight: 1.4,
-                    textAlign: "center",
-                  }}
-                >
+                <span className="text-[28px]">{option.emoji}</span>
+                <span className="text-xs text-text-dim leading-[1.4] text-center">
                   {t(option.labelKey)}
                 </span>
               </motion.button>
@@ -147,14 +112,7 @@ export default function MoodQuizScreen({ onSelect }: MoodQuizScreenProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={handleBack}
-          style={{
-            background: "none",
-            border: "none",
-            color: "var(--color-text-muted)",
-            fontSize: 13,
-            cursor: "pointer",
-            letterSpacing: 1,
-          }}
+          className="bg-transparent border-none text-text-muted text-[13px] cursor-pointer tracking-[1px]"
         >
           ← {t("navigation.backButton")}
         </motion.button>

@@ -97,8 +97,8 @@ export default function EsmaScreen({
           className="flex justify-center mb-10"
         >
           <div className="inline-flex items-center gap-3 px-5 py-2" style={{ borderBottom: `1px solid ${esmaColor}40` }}>
-            <span style={{ fontSize: 16 }}>{moodEmoji}</span>
-            <span style={{ fontFamily: "var(--font-cinzel)", letterSpacing: 2, fontSize: 12, color: "var(--color-text-dim)", textTransform: "uppercase" }}>
+            <span className="text-base">{moodEmoji}</span>
+            <span className="font-cinzel tracking-[2px] text-xs text-text-dim uppercase">
               {moodName}
             </span>
             <div className="w-[1px] h-3 bg-white/20 mx-2" />
@@ -243,14 +243,7 @@ export default function EsmaScreen({
                 {tEsma("tefekkurTitle")}
               </h3>
               
-              <div
-                style={{
-                  fontSize: 15,
-                  lineHeight: 1.9,
-                  color: "var(--color-text-dim)",
-                  letterSpacing: "0.2px",
-                }}
-              >
+              <div className="text-[15px] leading-[1.9] text-text-dim tracking-[0.2px]">
                 {tefekkur}
               </div>
             </div>
@@ -264,14 +257,14 @@ export default function EsmaScreen({
                 borderLeft: `2px solid ${esmaColor}`,
               }}
             >
-              <div style={{ fontFamily: "var(--font-cinzel)", fontSize: 11, letterSpacing: 4, color: "var(--color-text-dim)", textTransform: "uppercase" }}>
+              <div className="font-cinzel text-[11px] tracking-[4px] text-text-dim uppercase">
                 {tEsma("dhikrLabel")}
               </div>
               <div className="flex items-baseline gap-2">
-                <span style={{ fontFamily: "var(--font-cinzel)", fontSize: 28, fontWeight: 600, color: "#fff" }}>
+                <span className="font-cinzel text-[28px] font-semibold text-white">
                   {esma.dhikrCount}
                 </span>
-                <span style={{ fontSize: 11, color: "var(--color-text-muted)" }}>{tEsma("dhikrUnit")}</span>
+                <span className="text-[11px] text-text-muted">{tEsma("dhikrUnit")}</span>
               </div>
             </div>
 
@@ -288,26 +281,7 @@ export default function EsmaScreen({
               
               <button
                 onClick={onReset}
-                className="flex-1 relative overflow-hidden group flex justify-center items-center"
-                style={{
-                  padding: "16px 24px",
-                  background: "transparent",
-                  color: "var(--color-text-dim)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  fontFamily: "var(--font-cinzel)",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  letterSpacing: 2,
-                  transition: "all 0.3s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#fff";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "var(--color-text-dim)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                }}
+                className="flex-1 relative overflow-hidden group flex justify-center items-center px-6 py-4 bg-transparent text-text-dim border border-white/10 font-cinzel text-[15px] font-semibold tracking-[2px] transition-all duration-300 hover:text-white hover:border-white/30"
               >
                 <div className="absolute inset-0 bg-white/5 translate-y-[100%] transition-transform duration-300 group-hover:translate-y-0" />
                 <span className="relative z-10">{tEsma("restartButton")}</span>

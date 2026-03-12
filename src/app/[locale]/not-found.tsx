@@ -6,23 +6,13 @@ export default function NotFound() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center px-6 gap-4">
-      <div style={{ fontSize: 48 }}>🔍</div>
-      <p
-        style={{
-          color: "var(--color-text-dim)",
-          fontSize: 14,
-        }}
-      >
+      <div className="text-5xl">🔍</div>
+      <p className="text-text-dim text-sm">
         {t("notFound")}
       </p>
       <Link
         href="/"
-        style={{
-          color: "var(--color-gold)",
-          fontSize: 14,
-          textDecoration: "underline",
-          textUnderlineOffset: 4,
-        }}
+        className="text-gold text-sm underline underline-offset-4"
       >
         {t("restartLink")}
       </Link>

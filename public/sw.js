@@ -1,4 +1,4 @@
-const CACHE_NAME = 'inner-hunt-v1';
+const CACHE_NAME = 'inner-hunt-v2';
 
 // App shell resources to pre-cache
 const STATIC_ASSETS = [
@@ -58,9 +58,9 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => cached); // Fall back to cache if offline
 
-      // For page navigations: stale-while-revalidate
+      // For page navigations: network-first to avoid stale localized pages
       if (request.mode === 'navigate') {
-        return cached || networkFetch;
+        return networkFetch || cached;
       }
 
       // For assets: cache-first

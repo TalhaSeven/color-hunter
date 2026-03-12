@@ -319,5 +319,46 @@
       "peace": "Peace or surrender",
       "chaos": "Anxiety or confusion"
     }
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy — Inner Hunt",
+    "metaDescription": "Privacy policy for the Inner Hunt application.",
+    "label": "Legal",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "updatedAt": "March 13, 2026",
+    "backHome": "Back to Home",
+    "dataCollection": {
+      "title": "Data Collection",
+      "content": "Inner Hunt does not collect personal data from its users. There is no requirement to create an account, log in, or share any personal information. The app can be used completely anonymously."
+    },
+    "localStorage": {
+      "title": "Local Storage",
+      "content": "To improve your experience, your selections (mood, color, number) are stored only in your device's local storage (sessionStorage). This data is not sent to our servers and is deleted when the browser session ends."
+    },
+    "analytics": {
+      "title": "Analytics",
+      "content": "Vercel Analytics is used for usage statistics. This service does not collect personal data, does not use cookies, and does not store your IP address. Only anonymous, aggregated usage data is collected."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "content": "Our mobile app sends daily local notifications with your permission. These notifications are generated entirely on your device and no data is transmitted to any server. You can revoke notification permissions at any time from your device settings."
+    },
+    "thirdParty": {
+      "title": "Third-Party Services",
+      "content": "No third-party services are used beyond Vercel Analytics and Vercel Speed Insights. Font files are loaded from Google Fonts servers, but no personal data is shared in this process."
+    },
+    "children": {
+      "title": "Children's Privacy",
+      "content": "Inner Hunt is suitable for all age groups. No personal data is knowingly collected from children under the age of 13."
+    },
+    "changes": {
+      "title": "Changes",
+      "content": "This privacy policy may be updated from time to time. Changes will be published on this page."
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "For questions about our privacy policy, you can contact us at contact@innerhunt.com."
+    }
   }
 }

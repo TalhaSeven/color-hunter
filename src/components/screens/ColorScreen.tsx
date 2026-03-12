@@ -78,8 +78,7 @@ export default function ColorScreen({ colors, accentColor, onSelect, onBack }: C
               >
                 {/* Inner shadow/vignette for depth */}
                 <div 
-                  className="absolute inset-0 opacity-40 mix-blend-multiply" 
-                  style={{ background: "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.8) 100%)" }}
+                  className="absolute inset-0 opacity-40 mix-blend-multiply bg-linear-to-r from-black/80 via-transparent to-black/80"
                 />
                 
                 {/* Active glow */}
@@ -94,16 +93,7 @@ export default function ColorScreen({ colors, accentColor, onSelect, onBack }: C
                 {/* Color Name Typography */}
                 <div className="relative z-10 h-full flex items-center px-8 lg:px-16 mix-blend-exclusion">
                   <span
-                    style={{
-                      fontFamily: "var(--font-cinzel)",
-                      fontSize: isSelected ? "clamp(24px, 4vw, 40px)" : "clamp(16px, 2vw, 24px)",
-                      color: "#fff",
-                      letterSpacing: "4px",
-                      textTransform: "uppercase",
-                      transition: "all 0.6s cubic-bezier(0.19, 1, 0.22, 1)",
-                      opacity: isSelected ? 1 : 0.6
-                    }}
-                    className="group-hover:opacity-100 group-hover:tracking-[6px]"
+                    className={`font-cinzel text-white tracking-[4px] uppercase transition-all duration-600 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:opacity-100 group-hover:tracking-[6px] ${isSelected ? 'text-[clamp(24px,4vw,40px)] opacity-100' : 'text-[clamp(16px,2vw,24px)] opacity-60'}`}
                   >
                     {getColorName(color.hex)}
                   </span>
@@ -122,27 +112,8 @@ export default function ColorScreen({ colors, accentColor, onSelect, onBack }: C
         >
           <button
             onClick={onBack}
-            className="group flex items-center gap-2 cursor-pointer"
-            style={{
-              padding: "14px 24px",
-              background: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderLeft: `2px solid ${accentColor}`,
-              color: "var(--color-text-dim)",
-              fontFamily: "var(--font-cinzel)",
-              fontSize: 13,
-              letterSpacing: 2,
-              textTransform: "uppercase" as const,
-              transition: "all 0.3s cubic-bezier(0.19, 1, 0.22, 1)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-              e.currentTarget.style.color = "var(--color-text)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-              e.currentTarget.style.color = "var(--color-text-dim)";
-            }}
+            className="group flex items-center gap-2 cursor-pointer px-6 py-3.5 bg-white/[0.02] border border-white/[0.08] text-text-dim font-cinzel text-[13px] tracking-[2px] uppercase transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] hover:bg-white/[0.06] hover:text-text"
+            style={{ borderLeft: `2px solid ${accentColor}` }}
           >
             ← {t("backButton")}
           </button>

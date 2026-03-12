@@ -319,5 +319,46 @@
       "peace": "Huzur ya da teslimiyet",
       "chaos": "Kaygı ya da bulanıklık"
     }
+  },
+  "privacy": {
+    "metaTitle": "Gizlilik Politikası — Inner Hunt",
+    "metaDescription": "Inner Hunt uygulamasının gizlilik politikası.",
+    "label": "Yasal",
+    "title": "Gizlilik Politikası",
+    "lastUpdated": "Son güncelleme",
+    "updatedAt": "13 Mart 2026",
+    "backHome": "Ana Sayfaya Dön",
+    "dataCollection": {
+      "title": "Veri Toplama",
+      "content": "Inner Hunt, kullanıcılarından kişisel veri toplamaz. Hesap oluşturma, giriş yapma veya herhangi bir kişisel bilgi paylaşma zorunluluğu yoktur. Uygulama tamamen anonim olarak kullanılabilir."
+    },
+    "localStorage": {
+      "title": "Yerel Depolama",
+      "content": "Uygulama deneyiminizi iyileştirmek için, seçimleriniz (ruh hali, renk, sayı) yalnızca cihazınızın yerel depolamasında (sessionStorage) saklanır. Bu veriler sunucularımıza gönderilmez ve tarayıcı oturumu kapandığında silinir."
+    },
+    "analytics": {
+      "title": "Analitik",
+      "content": "Kullanım istatistikleri için Vercel Analytics kullanılmaktadır. Bu hizmet kişisel veri toplamaz, çerez kullanmaz ve IP adresinizi saklamaz. Yalnızca anonim, toplu kullanım verileri toplanır."
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "content": "Mobil uygulamamız, izninizle günlük lokal bildirimler gönderir. Bu bildirimler tamamen cihazınızda oluşturulur ve herhangi bir sunucuya veri iletilmez. Bildirim izninizi cihaz ayarlarından istediğiniz zaman iptal edebilirsiniz."
+    },
+    "thirdParty": {
+      "title": "Üçüncü Taraf Hizmetleri",
+      "content": "Vercel Analytics ve Vercel Speed Insights dışında üçüncü taraf hizmet kullanılmamaktadır. Google Fonts sunucularından font dosyaları yüklenir ancak bu işlemde kişisel veri paylaşılmaz."
+    },
+    "children": {
+      "title": "Çocukların Gizliliği",
+      "content": "Inner Hunt tüm yaş gruplarına uygundur. 13 yaş altı çocuklardan bilinçli olarak kişisel veri toplanmamaktadır."
+    },
+    "changes": {
+      "title": "Değişiklikler",
+      "content": "Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlanacaktır."
+    },
+    "contact": {
+      "title": "İletişim",
+      "content": "Gizlilik politikamız hakkında sorularınız için contact@innerhunt.com adresinden bizimle iletişime geçebilirsiniz."
+    }
   }
 }

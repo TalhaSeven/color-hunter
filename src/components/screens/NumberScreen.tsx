@@ -48,15 +48,7 @@ export default function NumberScreen({
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <h2 className="screen-title text-left !text-4xl md:!text-6xl">{t("title")}</h2>
             
-            <p
-              className="text-left md:text-right max-w-xs"
-              style={{
-                fontSize: 14,
-                color: "var(--color-text-dim)",
-                fontFamily: "var(--font-cinzel)",
-                letterSpacing: 1,
-              }}
-            >
+            <p className="text-left md:text-right max-w-xs text-sm text-text-dim font-cinzel tracking-[1px]">
               {t("hint")}
             </p>
           </div>
@@ -76,8 +68,7 @@ export default function NumberScreen({
           </svg>
 
           <div
-            className="flex flex-wrap justify-center items-center relative z-10"
-            style={{ gap: "2rem", maxWidth: 600 }}
+            className="flex flex-wrap justify-center items-center relative z-10 gap-8 max-w-[600px]"
           >
             {numbers.map((num, i) => {
               const isSelected = selected === num;
@@ -131,14 +122,8 @@ export default function NumberScreen({
 
                   {/* Number Content */}
                   <span 
-                    className="relative z-10 transition-all duration-300"
-                    style={{
-                      fontFamily: "var(--font-cinzel)",
-                      fontSize: 26,
-                      fontWeight: 600,
-                      color: isSelected ? "#000" : "var(--color-text)",
-                      textShadow: isSelected ? "none" : `0 0 10px ${accentColor}`,
-                    }}
+                    className={`relative z-10 transition-all duration-300 font-cinzel text-[26px] font-semibold ${isSelected ? 'text-black' : 'text-text'}`}
+                    style={{ textShadow: isSelected ? "none" : `0 0 10px ${accentColor}` }}
                   >
                     {num}
                   </span>
@@ -166,27 +151,8 @@ export default function NumberScreen({
         >
           <button
             onClick={onBack}
-            className="group flex items-center gap-2 cursor-pointer"
-            style={{
-              padding: "14px 24px",
-              background: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderLeft: `2px solid ${accentColor}`,
-              color: "var(--color-text-dim)",
-              fontFamily: "var(--font-cinzel)",
-              fontSize: 13,
-              letterSpacing: 2,
-              textTransform: "uppercase" as const,
-              transition: "all 0.3s cubic-bezier(0.19, 1, 0.22, 1)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-              e.currentTarget.style.color = "var(--color-text)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-              e.currentTarget.style.color = "var(--color-text-dim)";
-            }}
+            className="group flex items-center gap-2 cursor-pointer px-6 py-3.5 bg-white/[0.02] border border-white/[0.08] text-text-dim font-cinzel text-[13px] tracking-[2px] uppercase transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] hover:bg-white/[0.06] hover:text-text"
+            style={{ borderLeft: `2px solid ${accentColor}` }}
           >
             ← {t("backButton")}
           </button>

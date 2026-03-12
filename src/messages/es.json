@@ -319,5 +319,46 @@
       "peace": "Paz o rendición",
       "chaos": "Ansiedad o confusión"
     }
+  },
+  "privacy": {
+    "metaTitle": "Política de Privacidad — Inner Hunt",
+    "metaDescription": "Política de privacidad de la aplicación Inner Hunt.",
+    "label": "Legal",
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización",
+    "updatedAt": "13 de marzo de 2026",
+    "backHome": "Volver al Inicio",
+    "dataCollection": {
+      "title": "Recopilación de Datos",
+      "content": "Inner Hunt no recopila datos personales de sus usuarios. No es necesario crear una cuenta, iniciar sesión ni compartir información personal. La aplicación se puede usar de forma completamente anónima."
+    },
+    "localStorage": {
+      "title": "Almacenamiento Local",
+      "content": "Para mejorar su experiencia, sus selecciones (estado de ánimo, color, número) se almacenan solo en el almacenamiento local de su dispositivo (sessionStorage). Estos datos no se envían a nuestros servidores y se eliminan cuando se cierra la sesión del navegador."
+    },
+    "analytics": {
+      "title": "Analíticas",
+      "content": "Se utiliza Vercel Analytics para estadísticas de uso. Este servicio no recopila datos personales, no utiliza cookies y no almacena su dirección IP. Solo se recopilan datos de uso anónimos y agregados."
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "content": "Nuestra aplicación móvil envía notificaciones locales diarias con su permiso. Estas notificaciones se generan completamente en su dispositivo y no se transmiten datos a ningún servidor. Puede revocar los permisos de notificación en cualquier momento desde la configuración de su dispositivo."
+    },
+    "thirdParty": {
+      "title": "Servicios de Terceros",
+      "content": "No se utilizan servicios de terceros más allá de Vercel Analytics y Vercel Speed Insights. Los archivos de fuentes se cargan desde los servidores de Google Fonts, pero no se comparten datos personales en este proceso."
+    },
+    "children": {
+      "title": "Privacidad de los Niños",
+      "content": "Inner Hunt es adecuado para todos los grupos de edad. No se recopilan deliberadamente datos personales de menores de 13 años."
+    },
+    "changes": {
+      "title": "Cambios",
+      "content": "Esta política de privacidad puede actualizarse ocasionalmente. Los cambios se publicarán en esta página."
+    },
+    "contact": {
+      "title": "Contacto",
+      "content": "Para preguntas sobre nuestra política de privacidad, puede contactarnos en contact@innerhunt.com."
+    }
   }
 }

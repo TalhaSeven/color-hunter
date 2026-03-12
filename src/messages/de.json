@@ -319,5 +319,46 @@
       "peace": "Frieden oder Hingabe",
       "chaos": "Angst oder Verwirrung"
     }
+  },
+  "privacy": {
+    "metaTitle": "Datenschutzrichtlinie — Inner Hunt",
+    "metaDescription": "Datenschutzrichtlinie der Inner Hunt Anwendung.",
+    "label": "Rechtliches",
+    "title": "Datenschutzrichtlinie",
+    "lastUpdated": "Letzte Aktualisierung",
+    "updatedAt": "13. März 2026",
+    "backHome": "Zurück zur Startseite",
+    "dataCollection": {
+      "title": "Datenerfassung",
+      "content": "Inner Hunt erhebt keine personenbezogenen Daten. Es ist keine Kontoerstellung, Anmeldung oder Weitergabe persönlicher Informationen erforderlich. Die App kann vollständig anonym genutzt werden."
+    },
+    "localStorage": {
+      "title": "Lokale Speicherung",
+      "content": "Zur Verbesserung Ihres Erlebnisses werden Ihre Auswahlen (Stimmung, Farbe, Zahl) nur im lokalen Speicher Ihres Geräts (sessionStorage) gespeichert. Diese Daten werden nicht an unsere Server gesendet und beim Schließen der Browser-Sitzung gelöscht."
+    },
+    "analytics": {
+      "title": "Analytik",
+      "content": "Für Nutzungsstatistiken wird Vercel Analytics verwendet. Dieser Dienst erhebt keine personenbezogenen Daten, verwendet keine Cookies und speichert Ihre IP-Adresse nicht. Es werden nur anonyme, aggregierte Nutzungsdaten erfasst."
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "content": "Unsere mobile App sendet mit Ihrer Erlaubnis tägliche lokale Benachrichtigungen. Diese werden vollständig auf Ihrem Gerät erstellt und es werden keine Daten an Server übermittelt. Sie können die Benachrichtigungserlaubnis jederzeit in den Geräteeinstellungen widerrufen."
+    },
+    "thirdParty": {
+      "title": "Drittanbieterdienste",
+      "content": "Außer Vercel Analytics und Vercel Speed Insights werden keine Drittanbieterdienste genutzt. Schriftdateien werden von Google Fonts-Servern geladen, es werden dabei jedoch keine persönlichen Daten geteilt."
+    },
+    "children": {
+      "title": "Datenschutz für Kinder",
+      "content": "Inner Hunt ist für alle Altersgruppen geeignet. Es werden wissentlich keine personenbezogenen Daten von Kindern unter 13 Jahren erhoben."
+    },
+    "changes": {
+      "title": "Änderungen",
+      "content": "Diese Datenschutzrichtlinie kann gelegentlich aktualisiert werden. Änderungen werden auf dieser Seite veröffentlicht."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "content": "Für Fragen zu unserer Datenschutzrichtlinie erreichen Sie uns unter contact@innerhunt.com."
+    }
   }
 }
