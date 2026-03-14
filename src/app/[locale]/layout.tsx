@@ -4,9 +4,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { Amiri, Cinzel, Outfit } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import AxeProvider from "@/components/providers/AxeProvider";
+import VercelAnalytics from "@/components/providers/VercelAnalytics";
 
 const locales = ["tr", "en", "de", "es"] as const;
 
@@ -146,8 +145,7 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <AxeProvider />
-        <Analytics />
-        <SpeedInsights />
+        <VercelAnalytics />
       </body>
     </html>
   );

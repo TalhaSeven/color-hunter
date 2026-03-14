@@ -3,7 +3,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import JourneyHistory from "@/components/ui/JourneyHistory";
+import dynamic from "next/dynamic";
+const JourneyHistory = dynamic(() => import("@/components/ui/JourneyHistory"));
 import type { JourneyRecord } from "@/hooks/useJourneyHistory";
 
 interface IntroScreenProps {
