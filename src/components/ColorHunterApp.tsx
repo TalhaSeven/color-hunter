@@ -1,7 +1,8 @@
 "use client";
 
 import { useReducer, useMemo, useEffect, useRef, useSyncExternalStore } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { track } from "@vercel/analytics";
 import { AppState, AppAction, AppStep } from "@/types";
@@ -16,10 +17,10 @@ import InstallPrompt from "@/components/ui/InstallPrompt";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import SoundToggle from "@/components/ui/SoundToggle";
 import IntroScreen from "@/components/screens/IntroScreen";
-import MoodScreen from "@/components/screens/MoodScreen";
-import ColorScreen from "@/components/screens/ColorScreen";
-import NumberScreen from "@/components/screens/NumberScreen";
-import EsmaScreen from "@/components/screens/EsmaScreen";
+const MoodScreen = dynamic(() => import("@/components/screens/MoodScreen"));
+const ColorScreen = dynamic(() => import("@/components/screens/ColorScreen"));
+const NumberScreen = dynamic(() => import("@/components/screens/NumberScreen"));
+const EsmaScreen = dynamic(() => import("@/components/screens/EsmaScreen"));
 import type { MoodId } from "@/data/quizData";
 
 const initialState: AppState = {

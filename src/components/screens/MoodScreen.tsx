@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { Mood } from "@/types";
 import { moods } from "@/data/moods";
@@ -58,7 +58,7 @@ export default function MoodScreen({ onSelect, onBack }: MoodScreenProps) {
                 transition={{ duration: 0.8, delay: 0.2 + i * 0.1, ease: [0.19, 1, 0.22, 1] }}
                 onClick={() => setSelected(mood.id)}
                 aria-label={t(`moods.${mood.id}.name`)}
-                className={`group text-left cursor-pointer relative overflow-hidden backdrop-blur-md w-full sm:w-[85%] border px-10 py-8 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${alignmentOffset}`}
+                className={`group text-left cursor-pointer relative overflow-hidden w-full sm:w-[85%] border px-10 py-8 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${alignmentOffset}`}
                 style={{
                   background: isSelected ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.015)",
                   borderColor: isSelected ? mood.accentColor : "rgba(255,255,255,0.05)",

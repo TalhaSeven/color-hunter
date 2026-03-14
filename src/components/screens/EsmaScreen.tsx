@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { track } from "@vercel/analytics";
 import { EsmaBase } from "@/types";

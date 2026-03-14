@@ -234,6 +234,15 @@ textarea {
   }
 }
 
+@media (max-width: 768px) {
+  body::after {
+    display: none;
+  }
+  body::before {
+    display: none;
+  }
+}
+
 @media (max-width: 400px) {
   .mood-grid-responsive {
     grid-template-columns: 1fr !important;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 
 interface NumberScreenProps {
@@ -88,7 +88,7 @@ export default function NumberScreen({
                   }}
                   onClick={() => setSelected(num)}
                   aria-label={String(num)}
-                  className="group relative flex items-center justify-center cursor-pointer overflow-hidden backdrop-blur-sm"
+                  className="group relative flex items-center justify-center cursor-pointer overflow-hidden"
                   style={{
                     width: isSelected ? 90 : 76,
                     height: isSelected ? 90 : 76,

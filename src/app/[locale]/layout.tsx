@@ -12,23 +12,23 @@ const locales = ["tr", "en", "de", "es"] as const;
 
 const amiri = Amiri({
   variable: "--font-amiri",
-  subsets: ["arabic", "latin", "latin-ext"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  subsets: ["arabic", "latin"],
+  weight: ["400"],
+  style: ["normal"],
   display: "swap",
 });
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  weight: ["400", "600"],
   display: "swap",
 });
 
 const outfit = Outfit({
   variable: "--font-outfit",
-  subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "500", "600"],
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 

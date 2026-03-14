@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface AmbientBackgroundProps {
   accentColor: string;
@@ -33,10 +33,11 @@ export default function AmbientBackground({
           height: "120vh",
           top: "-10vh",
           left: "-10vw",
-          filter: "blur(140px)",
+          filter: "blur(80px)",
           opacity: 0.15,
           animation: "ambient-rotate 40s linear infinite alternate",
           transformOrigin: "center center",
+          willChange: "transform",
         }}
       />
 
@@ -50,11 +51,12 @@ export default function AmbientBackground({
           height: "110vh",
           bottom: "-20vh",
           right: "-15vw",
-          filter: "blur(120px)",
+          filter: "blur(60px)",
           opacity: 0.1,
           animation: "ambient-rotate 35s linear infinite reverse",
           transformOrigin: "40% 60%",
           mixBlendMode: "color-dodge",
+          willChange: "transform",
         }}
       />
       
